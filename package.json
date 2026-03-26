@@ -1,0 +1,22 @@
+{
+  "name": "slideforge",
+  "version": "0.1.0",
+  "private": true,
+  "description": "HTML-first slide authoring and export pipeline.",
+  "type": "module",
+  "bin": {
+    "slideforge": "./scripts/slideforge.mjs"
+  },
+  "scripts": {
+    "render": "node scripts/render.mjs",
+    "render:deck": "node scripts/render-deck.mjs",
+    "render:all": "node scripts/render-all.mjs",
+    "generate:samples": "bash scripts/generate-samples.sh"
+  },
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "dependencies": {
+    "playwright": "1.58.0"
+  }
+}

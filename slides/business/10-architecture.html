@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Business Architecture</title>
+    <style>
+      @page {
+        size: 1920px 1080px;
+        margin: 0;
+      }
+    </style>
+    <link rel="stylesheet" href="../templates/base/base.css" />
+    <link rel="stylesheet" href="../templates/business/theme.css" />
+  </head>
+  <body>
+    <main class="slide" data-slide-type="solution" data-slide-variant="default">
+      <div class="slide__shell">
+        <header class="slide__header">
+          <div class="brand">SlideForge / Business</div>
+          <div class="slide-id">Architecture</div>
+        </header>
+        <section class="slide__body">
+          <p class="kicker">このページは何用か</p>
+          <h1 class="title">構成要素、責務、データフローを説明する architecture ページ</h1>
+          <p class="purpose-note">用途: システム構成や責務分離を見せる</p>
+          <div class="architecture-grid">
+            <div class="architecture-card">
+              <div class="architecture-lane">
+                <div class="architecture-layer">
+                  <div class="architecture-layer__label">Presentation</div>
+                  <div class="architecture-layer__items">
+                    <div class="architecture-node">Theme CSS</div>
+                    <div class="architecture-node">Role Slides</div>
+                    <div class="architecture-node">Assets</div>
+                  </div>
+                </div>
+                <div class="architecture-layer">
+                  <div class="architecture-layer__label">Orchestration</div>
+                  <div class="architecture-layer__items">
+                    <div class="architecture-node">generate-samples</div>
+                    <div class="architecture-node">render.mjs</div>
+                    <div class="architecture-node">render-all</div>
+                  </div>
+                </div>
+                <div class="architecture-layer">
+                  <div class="architecture-layer__label">Output</div>
+                  <div class="architecture-layer__items">
+                    <div class="architecture-node">PNG</div>
+                    <div class="architecture-node">PDF</div>
+                    <div class="architecture-node">Docs</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="signal-list">
+              <div class="signal">
+                <strong>Layers</strong>
+                <span>層ごとに責務を分けたいときに使います。</span>
+              </div>
+              <div class="signal">
+                <strong>Responsibilities</strong>
+                <span>どこが何を担当しているかを説明できます。</span>
+              </div>
+              <div class="signal">
+                <strong>Flow</strong>
+                <span>入力から出力までの流れを一緒に置けます。</span>
+              </div>
+            </div>
+          </div>
+        </section>
+        <footer class="slide__footer">
+          <span>slides/business/10-architecture.html</span>
+          <span class="page-number">10 / 35</span>
+        </footer>
+      </div>
+    </main>
+  </body>
+</html>

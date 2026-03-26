@@ -1,0 +1,23 @@
+:root {
+  --font-display: "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+  --bg: linear-gradient(150deg, #fff4db 0%, #ffe8e0 55%, #ffe7f6 100%);
+  --bg-accent:
+    radial-gradient(circle at 15% 15%, rgba(255, 138, 91, 0.28), transparent 24%),
+    radial-gradient(circle at 88% 18%, rgba(255, 0, 122, 0.2), transparent 18%),
+    radial-gradient(circle at 78% 86%, rgba(255, 209, 102, 0.18), transparent 16%);
+  --surface: rgba(255, 255, 255, 0.76);
+  --surface-strong: rgba(255, 255, 255, 0.92);
+  --text: #2b1732;
+  --muted: #6b4d69;
+  --accent: #ff5f6d;
+  --accent-strong: #ff006e;
+  --accent-soft: rgba(255, 0, 110, 0.14);
+  --accent-soft-2: rgba(255, 149, 0, 0.28);
+  --shadow: 0 28px 90px rgba(128, 26, 78, 0.18);
+  --shadow-soft: 0 16px 46px rgba(255, 0, 110, 0.16);
+  --code-bg: #2b1732;
+  --slide-radius: 40px;
+  --panel-radius: 32px;
+  --media-radius: 40px;
+  --quote-radius: 40px;
+}

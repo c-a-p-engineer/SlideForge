@@ -1,0 +1,32 @@
+:root {
+  --font-display: "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+  --font-body: "Noto Sans CJK JP", "Noto Sans JP", sans-serif;
+  --bg: linear-gradient(160deg, #0b1220 0%, #111827 48%, #172033 100%);
+  --bg-accent:
+    linear-gradient(rgba(56, 189, 248, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(56, 189, 248, 0.06) 1px, transparent 1px),
+    radial-gradient(circle at 16% 18%, rgba(34, 197, 94, 0.2), transparent 24%),
+    radial-gradient(circle at 88% 18%, rgba(56, 189, 248, 0.18), transparent 18%);
+  --surface: rgba(17, 24, 39, 0.84);
+  --surface-strong: rgba(17, 24, 39, 0.95);
+  --border: rgba(148, 163, 184, 0.16);
+  --text: #e5edf7;
+  --muted: #94a3b8;
+  --accent: #22c55e;
+  --accent-strong: #38bdf8;
+  --accent-soft: rgba(34, 197, 94, 0.14);
+  --accent-soft-2: rgba(56, 189, 248, 0.24);
+  --shadow: 0 26px 88px rgba(2, 6, 23, 0.38);
+  --shadow-soft: 0 0 0 1px rgba(56, 189, 248, 0.16), 0 18px 44px rgba(2, 6, 23, 0.32);
+  --code-bg: #020617;
+  --code-text: #dbeafe;
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --danger: #f97316;
+  --slide-radius: 10px;
+  --panel-radius: 10px;
+  --media-radius: 10px;
+  --quote-radius: 10px;
+  --chip-radius: 12px;
+  --table-head-bg: rgba(56, 189, 248, 0.08);
+}

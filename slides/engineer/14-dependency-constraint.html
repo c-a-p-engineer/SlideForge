@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Engineer Dependency Constraint</title>
+    <style>
+      @page {
+        size: 1920px 1080px;
+        margin: 0;
+      }
+    </style>
+    <link rel="stylesheet" href="../templates/base/base.css" />
+    <link rel="stylesheet" href="../templates/engineer/theme.css" />
+  </head>
+  <body>
+    <main class="slide" data-slide-type="decision" data-slide-variant="default">
+      <div class="slide__shell">
+        <header class="slide__header">
+          <div class="brand">SlideForge / Engineer</div>
+          <div class="slide-id">Dependency</div>
+        </header>
+        <section class="slide__body">
+          <p class="kicker">このページは何用か</p>
+          <h1 class="title">依存関係や制約条件を明示する dependency / constraint ページ</h1>
+          <p class="purpose-note">用途: 後から「聞いていない」を防ぐ</p>
+          <div class="compare-grid">
+            <div class="compare-card">
+              <span class="compare-card__tag">Dependencies</span>
+              <ul>
+                <li>レビュー運用の整備</li>
+                <li>共通 CSS の管理</li>
+                <li>Docker 出力環境の固定</li>
+              </ul>
+            </div>
+            <div class="compare-card">
+              <span class="compare-card__tag">Constraints</span>
+              <ul>
+                <li>構造をテーマで変えない</li>
+                <li>出力崩れを起こす CSS を避ける</li>
+                <li>1 枚に情報を詰め込みすぎない</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+        <footer class="slide__footer">
+          <span>slides/engineer/14-dependency-constraint.html</span>
+          <span class="page-number">14 / 35</span>
+        </footer>
+      </div>
+    </main>
+  </body>
+</html>
