@@ -59,7 +59,7 @@ body {
   width: 100%;
   max-width: none;
   color: var(--accent);
-  font-size: 84px;
+  font-size: 100.8px;
   line-height: 1.16;
   letter-spacing: -0.02em;
 }
@@ -67,7 +67,7 @@ body {
 .lead {
   max-width: 100%;
   color: var(--muted);
-  font-size: 38px;
+  font-size: 45.6px;
   line-height: 1.56;
 }
 
@@ -112,7 +112,7 @@ body {
 .faq-card h3,
 .callout-card h3 {
   color: var(--text);
-  font-size: 36px;
+  font-size: 43.2px;
 }
 
 .deck-tag,
@@ -171,12 +171,12 @@ body {
 
 .signal strong {
   color: var(--accent);
-  font-size: 26px;
+  font-size: 31.2px;
 }
 
 .meta-card strong {
   color: var(--accent);
-  font-size: 20px;
+  font-size: 24px;
 }
 
 .card,
@@ -199,13 +199,13 @@ body {
 .step-card p,
 .faq-card p,
 .callout-card p {
-  font-size: 28px;
+  font-size: 33.6px;
   line-height: 1.48;
 }
 
 .bullet-list,
 .check-list {
-  font-size: 38px;
+  font-size: 45.6px;
   line-height: 1.5;
 }
 
@@ -217,15 +217,15 @@ body {
 .compare-card__tag,
 .deck-tag,
 .page-chip {
-  font-size: 20px;
+  font-size: 24px;
 }
 
 .compare-card h3 {
-  font-size: 40px;
+  font-size: 48px;
 }
 
 .compare-card ul {
-  font-size: 31px;
+  font-size: 37.2px;
   line-height: 1.46;
 }
 
@@ -234,7 +234,7 @@ body {
 }
 
 .signal span {
-  font-size: 26px;
+  font-size: 31.2px;
   line-height: 1.38;
 }
 
@@ -243,7 +243,7 @@ body {
 }
 
 .meta-card span {
-  font-size: 31px;
+  font-size: 37.2px;
   line-height: 1.28;
 }
 
