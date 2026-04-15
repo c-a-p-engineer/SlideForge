@@ -9,6 +9,7 @@
   },
   "scripts": {
     "render": "node scripts/render.mjs",
+    "capture": "node scripts/capture.mjs",
     "render:deck": "node scripts/render-deck.mjs",
     "render:all": "node scripts/render-all.mjs",
     "generate:samples": "bash scripts/generate-samples.sh"

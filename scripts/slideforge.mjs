@@ -9,6 +9,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 function printUsage() {
   console.log(`Usage:
   slideforge render --input <file|dir> --format <png|pdf> [options]
+  slideforge capture --url <url> [options]
   slideforge render-all
   slideforge generate-samples`);
 }
@@ -17,6 +18,8 @@ function resolveScript(command) {
   switch (command) {
     case "render":
       return path.join(__dirname, "render.mjs");
+    case "capture":
+      return path.join(__dirname, "capture.mjs");
     case "render-all":
       return path.join(__dirname, "render-all.mjs");
     case "generate-samples":

@@ -149,6 +149,95 @@ npm run render -- --input slides/business --format png --output dist/custom/busi
 npm run render -- --input slides/engineer/09-code.html --format png --scale 2
 ```
 
+## Web ページのスクリーンショット
+
+指定 URL を Playwright で開き、PNG として保存できます。出力先を省略した場合は `dist/captures/<hostname>-<timestamp>.png` に保存します。
+
+```bash
+npm run capture -- --url https://example.com
+slideforge capture --url https://example.com --output assets/screenshots/example.png
+```
+
+指定要素だけを撮る:
+
+```bash
+npm run capture -- --url https://example.com --selector ".hero"
+```
+
+ウィンドウサイズと解像度倍率を指定する:
+
+```bash
+npm run capture -- --url https://example.com --width 1440 --height 900 --scale 2
+```
+
+ページ全体を撮る:
+
+```bash
+npm run capture -- --url https://example.com --full-page
+```
+
+遅延表示や邪魔な要素に対応する:
+
+```bash
+npm run capture -- \
+  --url https://example.com \
+  --wait-until networkidle \
+  --wait-for ".main-content" \
+  --delay 500 \
+  --hide ".cookie-banner,.chat-widget"
+```
+
+主なオプション:
+
+- `--url`: 撮影対象 URL。`http` / `https` に対応
+- `--output`: 出力先 PNG。省略時は `dist/captures/<hostname>-<timestamp>.png`
+- `--selector`: 指定 CSS selector の最初の要素だけを撮影
+- `--width`: viewport 幅。デフォルトは `1440`
+- `--height`: viewport 高さ。デフォルトは `900`
+- `--scale`: device scale factor。デフォルトは `1`
+- `--full-page`: selector 未指定時にページ全体を撮影。デフォルトは viewport のみ
+- `--wait-until`: `load`, `domcontentloaded`, `networkidle`, `commit`。デフォルトは `networkidle`
+- `--wait-for`: 撮影前に表示を待つ CSS selector
+- `--timeout`: タイムアウト ms。デフォルトは `30000`
+- `--delay`: 読み込み後に追加で待つ ms。デフォルトは `0`
+- `--hide`: 撮影前に隠す CSS selector。カンマ区切りで複数指定可能
+
+### X / Twitter のスクリーンショット
+
+X / Twitter は未ログインの自動ブラウザだと、プロフィールページがロゴ画面やログイン誘導で止まることがあります。基本方針として、プロフィールやタイムラインを直接撮るのではなく、単体ポストを `publish.twitter.com` の埋め込みに変換して撮影します。
+
+単体ポストの埋め込み HTML は oEmbed で取得できます。
+
+```bash
+curl -L \
+  "https://publish.twitter.com/oembed?url=https%3A%2F%2Fx.com%2Fkawai_shichiten%2Fstatus%2F2044178592222028035"
+```
+
+返ってきた `html` をローカル HTML に置き、`platform.twitter.com/widgets.js` でカード表示させてから撮影します。スライド素材にする場合は、説明用のサイドバーや余白を入れず、ポストカードだけを囲む要素を `--selector` で切り出すと扱いやすくなります。
+
+```bash
+npm run capture -- \
+  --url http://127.0.0.1:8765/x-post-embed.html \
+  --selector ".tweet-capture" \
+  --output assets/screenshots/x-post.png \
+  --width 900 \
+  --height 900 \
+  --wait-until networkidle \
+  --delay 8000
+```
+
+どうしても X / Twitter のページを直接撮る場合は、右サイドバー、ログイン誘導、下部バナーなど不要な箇所を `--hide` で消してから撮影します。ただし表示は不安定なので、単体ポストは埋め込み方式を優先します。
+
+```bash
+npm run capture -- \
+  --url https://x.com/kawai_shichiten/status/2044178592222028035 \
+  --output assets/screenshots/x-post-direct.png \
+  --width 1440 \
+  --height 900 \
+  --delay 8000 \
+  --hide "[data-testid='sidebarColumn'],[data-testid='BottomBar']"
+```
+
 ## 別リポジトリで使う
 
 このリポジトリを別プロジェクトから使う場合は、インストール後に `slideforge` コマンドで入力ファイルまたはディレクトリを直接指定できます。
@@ -157,6 +246,7 @@ npm run render -- --input slides/engineer/09-code.html --format png --scale 2
 slideforge render --input ./slides/proposal --format pdf
 slideforge render --input ./slides/proposal/01-cover.html --format png
 slideforge render --input ./slides/mobile --format png --preset mobile
+slideforge capture --url https://example.com --output ./assets/screenshots/example.png
 slideforge generate-samples
 ```
 
