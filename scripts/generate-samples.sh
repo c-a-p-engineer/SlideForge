@@ -124,8 +124,8 @@ write_page() {
         margin: 0;
       }
     </style>
-    <link rel="stylesheet" href="../templates/base/base.css" />
-    <link rel="stylesheet" href="../templates/${style}/theme.css" />
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="stylesheet" href="./theme.css" />
   </head>
   <body>
     <main class="slide" data-slide-type="${slide_type}" data-slide-variant="${slide_variant}">
@@ -688,7 +688,7 @@ EOF
           <p class="purpose-note">用途: テキストだけでは伝わりにくい内容を補う</p>
           <div class="image-layout">
             <div class="media-card">
-              <img class="visual visual--tall" src="../templates/base/assets/placeholder-visual.svg" alt="Placeholder visual" />
+              <img class="visual visual--tall" src="../assets/placeholder-visual.svg" alt="Placeholder visual" />
             </div>
             <div class="card">
               <h3>向いている場面</h3>

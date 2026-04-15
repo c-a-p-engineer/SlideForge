@@ -7,7 +7,7 @@ async function listStyles() {
   const entries = await fs.readdir(root, { withFileTypes: true });
 
   return entries
-    .filter((entry) => entry.isDirectory() && entry.name !== "templates")
+    .filter((entry) => entry.isDirectory() && entry.name !== "assets")
     .map((entry) => entry.name)
     .sort((a, b) => a.localeCompare(b));
 }

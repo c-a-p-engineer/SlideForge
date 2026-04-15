@@ -7,27 +7,27 @@
   --font-mono: "JetBrains Mono", "SFMono-Regular", "Consolas", monospace;
   --bg: #f5f7fb;
   --bg-accent: radial-gradient(circle at top right, rgba(0, 0, 0, 0.08), transparent 30%);
-  --surface: rgba(255, 255, 255, 0.82);
+  --surface: rgba(255, 255, 255, 0.9);
   --surface-strong: rgba(255, 255, 255, 0.94);
-  --border: rgba(15, 23, 42, 0.08);
+  --border: rgba(15, 23, 42, 0.14);
   --text: #0f172a;
   --muted: #4b5563;
   --accent: #2563eb;
   --accent-strong: #1d4ed8;
   --accent-soft: rgba(37, 99, 235, 0.14);
   --accent-soft-2: rgba(37, 99, 235, 0.22);
-  --shadow: 0 24px 80px rgba(15, 23, 42, 0.18);
-  --shadow-soft: 0 12px 36px rgba(15, 23, 42, 0.08);
+  --shadow: 0 18px 56px rgba(15, 23, 42, 0.14);
+  --shadow-soft: 0 6px 22px rgba(15, 23, 42, 0.08);
   --code-bg: #0f172a;
   --code-text: #e5eef9;
   --success: #16a34a;
   --warning: #d97706;
   --danger: #dc2626;
-  --slide-radius: 34px;
-  --panel-radius: 28px;
-  --media-radius: 32px;
-  --chip-radius: 999px;
-  --quote-radius: 32px;
+  --slide-radius: 18px;
+  --panel-radius: 12px;
+  --media-radius: 14px;
+  --chip-radius: 8px;
+  --quote-radius: 14px;
   --table-head-bg: rgba(37, 99, 235, 0.08);
 }
 
@@ -101,8 +101,8 @@ body {
   gap: 12px;
   font-size: 24px;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--accent);
 }
 
@@ -140,7 +140,7 @@ body {
   font-family: var(--font-display);
   font-size: 76px;
   line-height: 1.04;
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
 }
 
 .lead {
@@ -281,8 +281,8 @@ body {
   color: var(--muted);
   font-size: 18px;
   font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .visual {
@@ -348,7 +348,7 @@ body {
   font-family: var(--font-display);
   font-size: 54px;
   line-height: 1.45;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 }
 
 .quote-card cite {
@@ -438,8 +438,8 @@ body {
 .highlight-stat__label {
   color: var(--muted);
   font-size: 20px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .step-card,
@@ -477,8 +477,8 @@ body {
   color: var(--accent-strong);
   font-size: 16px;
   font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .step-card h3,
@@ -533,8 +533,8 @@ body {
   color: var(--accent-strong);
   font-size: 16px;
   font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .compare-card h3 {
@@ -584,8 +584,8 @@ body {
   color: var(--accent-strong);
   font-size: 18px;
   font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .architecture-layer__items {
@@ -654,8 +654,8 @@ body {
   margin-bottom: 8px;
   color: var(--muted);
   font-size: 16px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .meta-card span {
@@ -759,8 +759,8 @@ body {
 .timeline__phase {
   font-size: 18px;
   font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--accent-strong);
 }
 
@@ -823,8 +823,8 @@ body {
   color: var(--accent-strong);
   font-size: 16px;
   font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .flow-step__title {
@@ -1031,8 +1031,8 @@ body {
 .table-card th {
   color: var(--muted);
   font-size: 18px;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  text-transform: none;
   background: var(--table-head-bg);
 }
 
@@ -1164,8 +1164,8 @@ body {
   color: var(--muted);
   font-size: 18px;
   font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .gantt__task {
@@ -1219,8 +1219,8 @@ body {
   color: var(--muted);
   font-size: 18px;
   font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0;
+  text-transform: none;
 }
 
 .matrix__x-label {

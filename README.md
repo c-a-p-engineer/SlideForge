@@ -13,6 +13,7 @@ HTML スライドを `PDF` / `PNG` に変換するためのリポジトリです
 
 詳細な設計メモは [docs/notes.md](/mnt/c/develop/workspace/SlideForge/docs/notes.md) に分けています。
 スライドの使い分けは [docs/slide-selection-guide.md](/mnt/c/develop/workspace/SlideForge/docs/slide-selection-guide.md) を参照してください。
+スライド全体のデザイン判断は [docs/slide-design-guide.md](/mnt/c/develop/workspace/SlideForge/docs/slide-design-guide.md)、テーマ一覧は [docs/theme-catalog.md](/mnt/c/develop/workspace/SlideForge/docs/theme-catalog.md) にまとめています。
 
 サンプルは共通構造で `problem / solution / comparison / evidence / decision / action / appendix` をカバーし、各ページに「このページは何用か」を明示しています。表紙にはタイトル、作者、日付、所属を入れ、棒・円・折れ線、タイムライン、フロー図、フローチャート、マインドマップ、ガントチャート、意思決定マトリクスも確認できます。加えて `slides/mobile/` にスマホ縦型のサンプルを用意しています。
 
@@ -78,8 +79,8 @@ AI が編集する場所の基本ルール:
 
 - 横型資料は `slides/business/`, `slides/engineer/`, `slides/fancy/`, `slides/pop/`
 - スマホ縦型は `slides/mobile/`
-- 共通スタイルは `slides/templates/base/`
-- テーマ差分は `slides/templates/<style>/theme.css`
+- 共通スタイルは `slides/base.css`
+- テーマ差分は `slides/<style>/theme.css`
 
 AI が最後に実行すべきコマンドの例:
 
