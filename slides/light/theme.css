@@ -1,0 +1,24 @@
+:root {
+  --bg: #f7f9fc;
+  --surface: #ffffff;
+  --text: #101828;
+  --muted: #475467;
+  --border: #d0d5dd;
+  --accent: #2563eb;
+  --accent-2: #0f766e;
+  --accent-kpi: #2563eb;
+  --accent-flow: #0f766e;
+  --soft: #e8f1ff;
+  --surface-soft: color-mix(in srgb, #ffffff 82%, transparent);
+  --grid-line: color-mix(in srgb, #2563eb 18%, transparent);
+  --accent-glow: color-mix(in srgb, #2563eb 30%, transparent);
+  --danger-soft: color-mix(in srgb, #dc2626 16%, transparent);
+  --flow-soft: color-mix(in srgb, #0f766e 16%, transparent);
+  --watermark: color-mix(in srgb, #2563eb 10%, transparent);
+  --chart-a: #2563eb;
+  --chart-b: #0f766e;
+  --chart-c: #f59e0b;
+  --chart-d: #dc2626;
+  --code-bg: #111827;
+  --code-text: #e5e7eb;
+}

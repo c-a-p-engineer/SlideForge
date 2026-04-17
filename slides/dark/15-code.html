@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ダーク 設定ファイルの例</title>
+    <style>@page { size: 1920px 1080px; margin: 0; }</style>
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="stylesheet" href="./theme.css" />
+  </head>
+  <body>
+    <main class="slide" data-theme="dark" data-slide-type="code" data-slide-variant="default">
+      <div class="slide__shell">
+        <header class="slide__header">
+          <div class="brand">テンプレートサンプル</div>
+          <div class="slide-id">15</div>
+        </header>
+        <section class="slide__body">
+          <p class="kicker">暗い背景で画面共有しやすいサンプル</p>
+          <h1 class="title">設定ファイルの例</h1>
+          <p class="lead">コード: 実装例を大きく読みやすく表示する</p>
+          <pre class="code-block"><code>const slide = {
+  theme: "light | dark",
+  type: "cover | chart | code",
+  export: ["png", "pdf"]
+};
+
+await render(slide);</code></pre>
+        </section>
+        <footer class="slide__footer">
+          <span>code</span>
+          <span>15 / 27</span>
+        </footer>
+      </div>
+    </main>
+  </body>
+</html>

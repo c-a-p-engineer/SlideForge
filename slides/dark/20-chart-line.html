@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ダーク 月別アクティブ率</title>
+    <style>@page { size: 1920px 1080px; margin: 0; }</style>
+    <link rel="stylesheet" href="../base.css" />
+    <link rel="stylesheet" href="./theme.css" />
+  </head>
+  <body>
+    <main class="slide" data-theme="dark" data-slide-type="chart-line" data-slide-variant="line">
+      <div class="slide__shell">
+        <header class="slide__header">
+          <div class="brand">テンプレートサンプル</div>
+          <div class="slide-id">20</div>
+        </header>
+        <section class="slide__body">
+          <p class="kicker">暗い背景で画面共有しやすいサンプル</p>
+          <h1 class="title">月別アクティブ率</h1>
+          <p class="lead">折れ線グラフ: 時系列の傾きを見る</p>
+          <div class="chart-layout"><svg class="chart-svg" viewBox="0 0 760 430" role="img" aria-label="折れ線グラフ">
+    <line class="axis" x1="80" y1="350" x2="700" y2="350"/><line class="axis" x1="80" y1="60" x2="80" y2="350"/>
+    <polyline class="line-a" points="110,310 220,270 330,240 440,170 550,150 660,95"/>
+    <polyline class="line-b" points="110,330 220,300 330,255 440,230 550,190 660,175"/>
+    <circle class="point-a" cx="110" cy="310" r="8"/><circle class="point-a" cx="220" cy="270" r="8"/><circle class="point-a" cx="330" cy="240" r="8"/><circle class="point-a" cx="440" cy="170" r="8"/><circle class="point-a" cx="550" cy="150" r="8"/><circle class="point-a" cx="660" cy="95" r="8"/>
+  </svg><div class="panel"><h2>時系列推移</h2><p>点ではなく傾きを読むため、グリッド線と凡例を添えます。</p></div></div>
+        </section>
+        <footer class="slide__footer">
+          <span>chart-line</span>
+          <span>20 / 27</span>
+        </footer>
+      </div>
+    </main>
+  </body>
+</html>
