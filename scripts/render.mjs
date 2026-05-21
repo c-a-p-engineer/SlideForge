@@ -71,7 +71,7 @@ async function listHtmlFiles(dirPath) {
   const entries = await fs.readdir(dirPath, { withFileTypes: true });
 
   return entries
-    .filter((entry) => entry.isFile() && /^\d{2}-.*\.html$/.test(entry.name))
+    .filter((entry) => entry.isFile() && entry.name.toLowerCase().endsWith(".html"))
     .map((entry) => path.join(dirPath, entry.name))
     .sort((a, b) => a.localeCompare(b));
 }

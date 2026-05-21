@@ -272,7 +272,7 @@ slideforge render --input ./slides/proposal/01-cover.html --format png
 slideforge capture --url https://example.com --output ./assets/screenshots/example.png
 ```
 
-ディレクトリ指定時は `01-*.html`, `02-*.html` のような連番 HTML を順番に処理します。`pdf` は複数ページ化、`png` は各 HTML を個別画像として出力します。
+ディレクトリ指定時は、ディレクトリ直下の `.html` ファイルをすべてファイル名順で処理します。`pdf` は複数ページ化、`png` は各 HTML を個別画像として出力します。
 
 ## Docker
 
