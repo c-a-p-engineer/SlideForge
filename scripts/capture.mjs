@@ -1,4 +1,5 @@
 import fs from "node:fs/promises";
+import os from "node:os";
 import path from "node:path";
 import { chromium } from "playwright";
 
@@ -88,6 +89,14 @@ function inferOutputPath(url) {
     "captures",
     `${safeHostName(url.hostname)}-${timestampForFileName()}.png`
   );
+}
+
+function buildTempOutputPath(outputPath) {
+  const parsed = path.parse(outputPath);
+  const tempName = `${parsed.name}-${process.pid}-${Date.now()}-${Math.random()
+    .toString(16)
+    .slice(2)}${parsed.ext}`;
+  return path.join(os.tmpdir(), tempName);
 }
 
 function parseHideSelectors(value) {
@@ -180,20 +189,27 @@ async function capture(options, cwd) {
     }
 
     await fs.mkdir(path.dirname(options.outputPath), { recursive: true });
+    const tempOutputPath = buildTempOutputPath(options.outputPath);
 
-    if (options.selector) {
-      const target = page.locator(options.selector).first();
-      await target.waitFor({ state: "visible", timeout: options.timeout });
-      await target.screenshot({
-        path: options.outputPath,
-        type: "png"
-      });
-    } else {
-      await page.screenshot({
-        path: options.outputPath,
-        type: "png",
-        fullPage: options.fullPage
-      });
+    try {
+      if (options.selector) {
+        const target = page.locator(options.selector).first();
+        await target.waitFor({ state: "visible", timeout: options.timeout });
+        await target.screenshot({
+          path: tempOutputPath,
+          type: "png"
+        });
+      } else {
+        await page.screenshot({
+          path: tempOutputPath,
+          type: "png",
+          fullPage: options.fullPage
+        });
+      }
+
+      await fs.copyFile(tempOutputPath, options.outputPath);
+    } finally {
+      await fs.rm(tempOutputPath, { force: true }).catch(() => {});
     }
 
     return {

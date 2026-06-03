@@ -1,4 +1,5 @@
 import fs from "node:fs/promises";
+import os from "node:os";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 import { chromium } from "playwright";
@@ -180,6 +181,14 @@ async function openPage(browser, filePath, width, height, scale) {
   return page;
 }
 
+function buildTempOutputPath(outputPath) {
+  const parsed = path.parse(outputPath);
+  const tempName = `${parsed.name}-${process.pid}-${Date.now()}-${Math.random()
+    .toString(16)
+    .slice(2)}${parsed.ext}`;
+  return path.join(os.tmpdir(), tempName);
+}
+
 async function renderSingleFile({
   browser,
   inputPath,
@@ -191,6 +200,7 @@ async function renderSingleFile({
   scale
 }) {
   const page = await openPage(browser, inputPath, width, height, scale);
+  const tempOutputPath = buildTempOutputPath(outputPath);
 
   try {
     const slide = page.locator(selector).first();
@@ -199,20 +209,24 @@ async function renderSingleFile({
     if (format === "png") {
       await page.emulateMedia({ media: "screen" });
       await slide.screenshot({
-        path: outputPath,
+        path: tempOutputPath,
         type: "png"
       });
     } else {
       await page.emulateMedia({ media: "print" });
       await page.pdf({
-        path: outputPath,
+        path: tempOutputPath,
         printBackground: true,
         width: `${width}px`,
         height: `${height}px`,
         preferCSSPageSize: true
       });
     }
+
+    await fs.mkdir(path.dirname(outputPath), { recursive: true });
+    await fs.copyFile(tempOutputPath, outputPath);
   } finally {
+    await fs.rm(tempOutputPath, { force: true }).catch(() => {});
     await page.close();
   }
 }
