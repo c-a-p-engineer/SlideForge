@@ -36,6 +36,7 @@ slideforge-book-theme/
     boxes.css
     chapter.css
     code.css
+    fit.js
     flow.css
     mermaid.css
     print.css
@@ -46,7 +47,8 @@ slideforge-book-theme/
 
 1. `examples/*.html` をブラウザで開き、部品と印刷時の見え方を確認します。
 2. ベースにしたい HTML を複製し、本文内容に合わせてテキストやノード数を調整します。
-3. PNG / PDF 化するときは SlideForge の既存レンダラーを使います。
+3. 内容量が読めないページは `theme/fit.js` を読み込み、`.book-page` へ `data-auto-fit="shrink"` を付けます。
+4. PNG / PDF 化するときは SlideForge の既存レンダラーを使います。
 
 ```bash
 cd vendor/SlideForge
@@ -55,6 +57,47 @@ npm run render -- --input slideforge-book-theme/examples --format pdf
 ```
 
 `slideforge-book-theme/package.json` にも同等のショートカットを入れています。
+
+### 1枚に収める自動フィット
+
+本文図版では、内容を増やした結果として 1 ページからはみ出すケースがあります。Book テーマには、そういうページだけを少し縮めて 1 枚へ収める `theme/fit.js` を入れています。
+
+使い方:
+
+```html
+<head>
+  <link rel="stylesheet" href="../theme/book.css" />
+  <script defer src="../theme/fit.js"></script>
+</head>
+<body>
+  <main class="slide">
+    <div class="book-page page-shell" data-auto-fit="shrink">
+      ...
+    </div>
+  </main>
+</body>
+```
+
+- 縮小は必要なときだけ行い、収まっているページはそのままです。
+- 対象は `data-auto-fit="shrink"` を付けた `.book-page` だけです。
+- 先に内容を整理し、それでも超えるページの保険として使う前提です。
+
+### レンダリング時の余白トリミング
+
+固定サイズスライドを画像化すると、レイアウトによっては下側などに余白が残ります。SlideForge の PNG レンダラは、要素内の実際の内容量を見て余白を自動で詰められます。Book テーマでは既定で下側の空白を自動トリムする設定にしています。
+
+```css
+:root {
+  --slideforge-auto-trim: block-end;
+  --slideforge-trim-padding-bottom: 24px;
+}
+```
+
+- 単位は `px` です。
+- PNG レンダリング時だけ反映します。
+- `--slideforge-auto-trim` は `none`, `block-end`, `block`, `box` を使えます。
+- `:root` に置けばテーマ全体、`.slide.some-layout` に置けばレイアウト単位、個別ページに置けばそのページだけ調整できます。
+- さらに明示的に削りたい場合は `--slideforge-crop-*` を追加で指定できます。
 
 ## デザイン原則
 

@@ -162,6 +162,8 @@ npm run render:all
 - `--scale`: PNG 出力の解像度倍率
 - `--selector`: PNG 切り出し対象。デフォルトは `.slide`
 
+PNG 出力では、切り出し対象要素に設定された `--slideforge-auto-trim` と `--slideforge-trim-padding-*` を読んで、内容の周囲に残る空白を自動トリミングできます。テーマごとに余白設計を変えたい場合は、各テーマの CSS でこの値を調整してください。必要なら `--slideforge-crop-*` で手動クロップも追加できます。
+
 出力例:
 
 ```bash

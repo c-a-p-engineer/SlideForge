@@ -5,14 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Book Theme Flow</title>
     <link rel="stylesheet" href="../theme/book.css" />
+    <script defer src="../theme/fit.js"></script>
   </head>
   <body>
     <main class="slide">
-      <div class="book-page page-shell">
-        <header class="page-meta">
-          <span class="page-meta__series">CodexでPRを作る流れ</span>
-          <span class="page-meta__folio">Flow</span>
-        </header>
+      <div class="book-page page-shell" data-auto-fit="shrink">
         <section class="flow-panel">
           <h1 class="flow-title">差分確認から PR 作成までの処理フロー</h1>
           <div class="flow-diagram">
@@ -57,10 +54,6 @@
           </div>
           <p class="caption">黒線を基本にし、重要ルートだけアクセント色と太線で補強する。分岐は線幅とラベルでも判別できるようにする。</p>
         </section>
-        <footer class="page-meta">
-          <span>ノード / 矢印 / 分岐 / 線幅の強弱</span>
-          <span class="page-meta__folio">07-04</span>
-        </footer>
       </div>
     </main>
   </body>

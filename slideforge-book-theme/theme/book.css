@@ -13,13 +13,22 @@
   --color-line: #111111;
   --color-accent: #005BAC;
   --color-shade: #f2f2f2;
-  --font-body: "Noto Serif JP", serif;
-  --font-heading: "Noto Sans JP", sans-serif;
+  --font-body: "IPAGothic", "IPAexGothic", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
+  --font-heading: "IPAGothic", "IPAexGothic", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
   --font-code: "JetBrains Mono", "Consolas", monospace;
   --page-width: 1920px;
   --page-height: 1080px;
   --page-padding-x: 96px;
-  --page-padding-y: 82px;
+  --page-padding-y: 52px;
+  --slideforge-auto-trim: block-end;
+  --slideforge-trim-padding-top: 0px;
+  --slideforge-trim-padding-right: 0px;
+  --slideforge-trim-padding-bottom: var(--page-padding-y);
+  --slideforge-trim-padding-left: 0px;
+  --slideforge-crop-top: 0px;
+  --slideforge-crop-right: 0px;
+  --slideforge-crop-bottom: 0px;
+  --slideforge-crop-left: 0px;
   --radius-sm: 10px;
   --radius-md: 18px;
   --radius-lg: 28px;
@@ -66,18 +75,12 @@ body {
 
 .page-shell {
   display: grid;
-  gap: 28px;
+  gap: 20px;
   min-height: calc(var(--page-height) - (var(--page-padding-y) * 2));
 }
 
 .page-meta {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 24px;
-  font-family: var(--font-heading);
-  font-size: 28px;
-  letter-spacing: 0.04em;
+  display: none;
 }
 
 .page-meta__series {
