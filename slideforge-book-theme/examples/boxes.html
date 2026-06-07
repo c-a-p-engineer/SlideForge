@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Theme Boxes</title>
+    <link rel="stylesheet" href="../theme/book.css" />
+  </head>
+  <body>
+    <main class="slide">
+      <div class="book-page page-shell">
+        <header class="page-meta">
+          <span class="page-meta__series">AIとチーム開発</span>
+          <span class="page-meta__folio">Boxes</span>
+        </header>
+        <section class="cols-2">
+          <div class="stack">
+            <div class="book-box book-box--point">
+              <div class="book-box__label">POINT</div>
+              <h2 class="book-box__title">AI利用ルールはレビュー手順まで含めて定義する</h2>
+              <div class="book-box__body">
+                <p>「AIを使ってよい」だけでは足りない。生成物を誰が検証し、どの差分を人間が確認するかまで書いておく。</p>
+              </div>
+            </div>
+            <div class="book-box book-box--memo">
+              <div class="book-box__label">MEMO</div>
+              <h2 class="book-box__title">モデル名より運用ルールを先に統一する</h2>
+              <div class="book-box__body">
+                <p>使用モデルが多少違っても、レビュー観点と完了条件が揃っていれば運用は崩れにくい。</p>
+              </div>
+            </div>
+          </div>
+          <div class="stack">
+            <div class="book-box book-box--warning">
+              <div class="book-box__label">! 注意</div>
+              <h2 class="book-box__title">責任の所在を曖昧にしない</h2>
+              <div class="book-box__body">
+                <p>「AIが提案したから」でレビューを省略すると、障害時に誰も理由を説明できなくなる。採用判断は人間が持つ。</p>
+              </div>
+            </div>
+            <div class="book-box book-box--ai">
+              <div class="book-box__label">AI</div>
+              <h2 class="book-box__title">AIへの依頼文は検証条件から書く</h2>
+              <div class="book-box__body">
+                <p>例: 「PR本文を生成してください」ではなく、「変更点、影響範囲、確認手順を 3 項目で整理してください」と依頼する。</p>
+              </div>
+            </div>
+          </div>
+        </section>
+        <footer class="page-meta">
+          <span>色だけに頼らず、ラベル・太枠・左帯で区別</span>
+          <span class="page-meta__folio">09-04</span>
+        </footer>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "name": "slideforge-book-theme",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Book-oriented templates for SlideForge.",
+  "scripts": {
+    "render:chapter": "node ../scripts/render.mjs --input examples/chapter.html --format png",
+    "render:examples:png": "node ../scripts/render.mjs --input examples --format png",
+    "render:examples:pdf": "node ../scripts/render.mjs --input examples --format pdf"
+  }
+}

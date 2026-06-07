@@ -1,0 +1,90 @@
+.flow-panel {
+  display: grid;
+  gap: 22px;
+}
+
+.flow-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 42px;
+  line-height: 1.35;
+  font-weight: 800;
+}
+
+.flow-diagram {
+  position: relative;
+  border: var(--line-thin) solid var(--color-line);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(var(--color-bg), var(--color-bg)) padding-box,
+    repeating-linear-gradient(
+      0deg,
+      transparent 0,
+      transparent 36px,
+      rgba(0, 0, 0, 0.03) 36px,
+      rgba(0, 0, 0, 0.03) 72px
+    ) border-box;
+  padding: 28px;
+}
+
+.flow-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.flow-node {
+  fill: var(--color-bg);
+  stroke: var(--color-line);
+  stroke-width: 3;
+}
+
+.flow-node--accent {
+  stroke: var(--color-accent);
+  stroke-width: 5;
+}
+
+.flow-node--shade {
+  fill: var(--color-shade);
+}
+
+.flow-node--decision {
+  fill: var(--color-bg);
+  stroke-dasharray: 8 6;
+}
+
+.flow-text {
+  fill: var(--color-text);
+  font-family: var(--font-heading);
+  font-size: 22px;
+  font-weight: 700;
+  text-anchor: middle;
+}
+
+.flow-text--small {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.connector {
+  fill: none;
+  stroke: var(--color-line);
+  stroke-width: 3;
+  marker-end: url(#flow-arrow);
+}
+
+.connector--strong {
+  stroke-width: 6;
+}
+
+.connector--accent {
+  stroke: var(--color-accent);
+  stroke-width: 5;
+}
+
+.connector-label {
+  fill: var(--color-text);
+  font-family: var(--font-heading);
+  font-size: 18px;
+  font-weight: 700;
+}

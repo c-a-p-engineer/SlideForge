@@ -1,0 +1,133 @@
+.chapter-page .page-shell {
+  grid-template-rows: auto 1fr auto;
+}
+
+.chapter-hero {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  gap: 44px;
+  align-items: start;
+}
+
+.chapter-number {
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  font-family: var(--font-heading);
+}
+
+.chapter-number__label {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.chapter-number__value {
+  font-size: 188px;
+  line-height: 0.9;
+  font-weight: 900;
+}
+
+.chapter-copy {
+  display: grid;
+  gap: 22px;
+  align-content: start;
+  padding-top: 12px;
+}
+
+.chapter-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 88px;
+  line-height: 1.15;
+  font-weight: 900;
+}
+
+.chapter-subtitle {
+  margin: 0;
+  max-width: 20em;
+  color: var(--color-muted);
+  font-size: 38px;
+  line-height: 1.7;
+}
+
+.chapter-accent {
+  width: min(720px, 100%);
+  height: 16px;
+  border-top: var(--line-thin) solid var(--color-line);
+  border-bottom: var(--line-thin) solid var(--color-line);
+  background: repeating-linear-gradient(
+    90deg,
+    var(--color-accent) 0,
+    var(--color-accent) 30px,
+    transparent 30px,
+    transparent 44px
+  );
+}
+
+.chapter-summary {
+  max-width: 1200px;
+  padding: 28px 32px;
+  border: var(--line-thin) solid var(--color-line);
+  border-left: 14px solid var(--color-line);
+  background:
+    linear-gradient(var(--color-bg), var(--color-bg)) padding-box,
+    repeating-linear-gradient(
+      -45deg,
+      transparent 0,
+      transparent 22px,
+      rgba(0, 0, 0, 0.04) 22px,
+      rgba(0, 0, 0, 0.04) 44px
+    ) border-box;
+}
+
+.section-heading {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+  gap: 28px;
+  align-items: start;
+}
+
+.section-heading__bar {
+  width: 20px;
+  min-height: 170px;
+  background:
+    linear-gradient(
+      180deg,
+      var(--color-line) 0,
+      var(--color-line) 28%,
+      var(--color-accent) 28%,
+      var(--color-accent) 100%
+    );
+}
+
+.section-heading__body {
+  display: grid;
+  gap: 16px;
+}
+
+.section-heading__eyebrow {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.section-heading__title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 64px;
+  line-height: 1.25;
+  font-weight: 900;
+}
+
+.section-heading__desc {
+  margin: 0;
+  max-width: 24em;
+  color: var(--color-muted);
+  font-size: 32px;
+  line-height: 1.75;
+}

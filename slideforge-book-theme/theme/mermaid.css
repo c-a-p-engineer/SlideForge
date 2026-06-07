@@ -1,0 +1,83 @@
+.mermaid-panel {
+  display: grid;
+  gap: 22px;
+}
+
+.mermaid-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 42px;
+  line-height: 1.35;
+  font-weight: 800;
+}
+
+.mermaid-wrapper {
+  padding: 26px;
+  border: var(--line-thin) solid var(--color-line);
+  border-radius: var(--radius-lg);
+  background: var(--color-bg);
+}
+
+.mermaid-wrapper .mermaid {
+  display: grid;
+  place-items: center;
+}
+
+.mermaid-wrapper svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.mermaid-wrapper .node rect,
+.mermaid-wrapper .node polygon,
+.mermaid-wrapper .node path,
+.mermaid-wrapper .node circle {
+  fill: var(--color-bg);
+  stroke: var(--color-line);
+  stroke-width: 2.5;
+}
+
+.mermaid-wrapper .node.gray rect,
+.mermaid-wrapper .node.gray polygon,
+.mermaid-wrapper .node.gray path {
+  fill: var(--color-shade);
+}
+
+.mermaid-wrapper .node.accent rect,
+.mermaid-wrapper .node.accent polygon,
+.mermaid-wrapper .node.accent path {
+  stroke: var(--color-accent);
+  stroke-width: 4.5;
+}
+
+.mermaid-wrapper .label,
+.mermaid-wrapper .edgeLabel {
+  font-family: var(--font-heading);
+  fill: var(--color-text);
+  color: var(--color-text);
+  font-size: 20px;
+  line-height: 1.4;
+}
+
+.mermaid-wrapper .edgePath path,
+.mermaid-wrapper .flowchart-link {
+  fill: none;
+  stroke: var(--color-line);
+  stroke-width: 3;
+}
+
+.mermaid-wrapper .edgePath.accent path {
+  stroke: var(--color-accent);
+  stroke-width: 5;
+}
+
+.mermaid-wrapper .marker path {
+  fill: var(--color-line);
+  stroke: var(--color-line);
+}
+
+.mermaid-wrapper .marker.accent path {
+  fill: var(--color-accent);
+  stroke: var(--color-accent);
+}

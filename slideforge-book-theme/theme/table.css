@@ -1,0 +1,67 @@
+.table-panel {
+  display: grid;
+  gap: 20px;
+}
+
+.table-title {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 42px;
+  line-height: 1.35;
+  font-weight: 800;
+}
+
+.compare-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+  font-size: 28px;
+  line-height: 1.7;
+}
+
+.compare-table caption {
+  margin-bottom: 16px;
+  text-align: left;
+  color: var(--color-muted);
+  font-size: 24px;
+  caption-side: top;
+}
+
+.compare-table th,
+.compare-table td {
+  padding: 18px 20px;
+  border: var(--line-thin) solid var(--color-line);
+  vertical-align: top;
+}
+
+.compare-table thead th {
+  background:
+    repeating-linear-gradient(
+      -45deg,
+      rgba(0, 0, 0, 0.08) 0,
+      rgba(0, 0, 0, 0.08) 10px,
+      transparent 10px,
+      transparent 20px
+    ),
+    var(--color-shade);
+  font-family: var(--font-heading);
+  font-size: 26px;
+  line-height: 1.55;
+  font-weight: 800;
+}
+
+.compare-table tbody th[scope="row"] {
+  width: 22%;
+  background: var(--color-bg);
+  font-family: var(--font-heading);
+  font-size: 26px;
+  text-align: left;
+  font-weight: 700;
+}
+
+.compare-table .is-better {
+  font-weight: 700;
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+  text-underline-offset: 0.16em;
+}
