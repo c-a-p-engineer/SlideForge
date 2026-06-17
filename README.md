@@ -164,6 +164,17 @@ npm run render:all
 
 PNG 出力では、切り出し対象要素に設定された `--slideforge-auto-trim` と `--slideforge-trim-padding-*` を読んで、内容の周囲に残る空白を自動トリミングできます。テーマごとに余白設計を変えたい場合は、各テーマの CSS でこの値を調整してください。必要なら `--slideforge-crop-*` で手動クロップも追加できます。
 
+`--slideforge-auto-trim` には次の値を使えます。
+
+- `none`: 自動トリムしない
+- `block-end`: 下方向だけ自動トリムする
+- `block`: 上下方向を自動トリムする
+- `inline-end`: 右方向だけ自動トリムする
+- `inline`: 左右方向を自動トリムする
+- `box`: 上下左右を自動トリムする
+
+左右をトリムする場合も、本文図版として読める最低限の余白を残すため、`--slideforge-trim-padding-left` と `--slideforge-trim-padding-right` を指定してください。SlideForge 本用テーマでは、左右の既定余白を `48px` にしています。
+
 出力例:
 
 ```bash

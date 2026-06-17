@@ -11,20 +11,20 @@
   --color-text: #111111;
   --color-muted: #666666;
   --color-line: #111111;
-  --color-accent: #005BAC;
-  --color-shade: #f2f2f2;
+  --color-accent: #0b4f6c;
+  --color-shade: #eeeeee;
   --font-body: "IPAGothic", "IPAexGothic", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
   --font-heading: "IPAGothic", "IPAexGothic", "Hiragino Sans", "Yu Gothic", "Noto Sans JP", sans-serif;
   --font-code: "JetBrains Mono", "Consolas", monospace;
   --page-width: 1920px;
   --page-height: 1080px;
-  --page-padding-x: 96px;
-  --page-padding-y: 52px;
+  --page-padding-x: 88px;
+  --page-padding-y: 48px;
   --slideforge-auto-trim: block-end;
   --slideforge-trim-padding-top: 0px;
-  --slideforge-trim-padding-right: 0px;
+  --slideforge-trim-padding-right: 48px;
   --slideforge-trim-padding-bottom: var(--page-padding-y);
-  --slideforge-trim-padding-left: 0px;
+  --slideforge-trim-padding-left: 48px;
   --slideforge-crop-top: 0px;
   --slideforge-crop-right: 0px;
   --slideforge-crop-bottom: 0px;
@@ -96,7 +96,7 @@ body {
   margin: 0;
   max-width: 48em;
   color: var(--color-muted);
-  font-size: 34px;
+  font-size: 38px;
   line-height: 1.8;
 }
 
@@ -141,7 +141,7 @@ body {
   padding: 8px 14px;
   border: var(--line-thin) solid var(--color-line);
   font-family: var(--font-heading);
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
@@ -150,14 +150,14 @@ body {
 .book-note {
   margin: 0;
   color: var(--color-muted);
-  font-size: 26px;
+  font-size: 30px;
   line-height: 1.7;
 }
 
 .dense-list {
   margin: 0;
   padding-left: 1.3em;
-  font-size: 32px;
+  font-size: 36px;
   line-height: 1.8;
 }
 
@@ -168,6 +168,6 @@ body {
 .caption {
   margin: 0;
   color: var(--color-muted);
-  font-size: 24px;
+  font-size: 28px;
   line-height: 1.6;
 }

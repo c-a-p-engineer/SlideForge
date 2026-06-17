@@ -9,7 +9,14 @@ const PRESETS = {
   mobile: { width: 1080, height: 1920 }
 };
 const PNG_CAPTURE_GUTTER = 64;
-const AUTO_TRIM_MODES = new Set(["none", "block-end", "block", "box"]);
+const AUTO_TRIM_MODES = new Set([
+  "none",
+  "block-end",
+  "block",
+  "inline-end",
+  "inline",
+  "box"
+]);
 
 function parseArgs(argv) {
   const options = {};
@@ -327,12 +334,17 @@ async function resolveClipRegion(locator) {
       autoCrop.top = Math.max(0, trim.bounds.top - trim.padding.top);
     }
 
-    if (mode === "box") {
+    if (mode === "inline" || mode === "box") {
       autoCrop.left = Math.max(0, trim.bounds.left - trim.padding.left);
+    }
+
+    if (mode === "inline" || mode === "inline-end" || mode === "box") {
       autoCrop.right = Math.max(0, boundingBox.width - trim.bounds.right - trim.padding.right);
     }
 
-    autoCrop.bottom = Math.max(0, boundingBox.height - trim.bounds.bottom - trim.padding.bottom);
+    if (mode === "block-end" || mode === "block" || mode === "box") {
+      autoCrop.bottom = Math.max(0, boundingBox.height - trim.bounds.bottom - trim.padding.bottom);
+    }
   }
 
   const crop = {
