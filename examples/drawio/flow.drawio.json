@@ -1,0 +1,10 @@
+{
+  "type": "flow",
+  "title": "AI任せの事故経路",
+  "nodes": [
+    { "text": "要求", "tone": "normal" },
+    { "text": "実装", "tone": "blue" },
+    { "text": "テスト無し", "tone": "orange" },
+    { "text": "事故", "tone": "danger" }
+  ]
+}

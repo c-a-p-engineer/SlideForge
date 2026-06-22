@@ -239,6 +239,68 @@ npm run capture -- \
 - `--delay`: 読み込み後に追加で待つ ms。デフォルトは `0`
 - `--hide`: 撮影前に隠す CSS selector。カンマ区切りで複数指定可能
 
+## draw.io 図版生成
+
+`.drawio.json` から、draw.io で再編集できる `.drawio` と `.drawio.png` を生成できます。PNGには draw.io の図データを埋め込むため、対応エディタで開くと再編集できます。
+
+```bash
+npm run drawio -- --input examples/drawio/flow.drawio.json --output dist/drawio
+```
+
+ディレクトリを指定すると、直下の `*.drawio.json` をまとめて処理します。
+
+```bash
+npm run drawio -- --input examples/drawio --output dist/drawio
+```
+
+入力JSONの例:
+
+```json
+{
+  "type": "flow",
+  "title": "AI任せの事故経路",
+  "nodes": [
+    { "text": "要求", "tone": "normal" },
+    { "text": "実装", "tone": "blue" },
+    { "text": "テスト無し", "tone": "orange" },
+    { "text": "事故", "tone": "danger" }
+  ]
+}
+```
+
+主な項目:
+
+- `type`: `flow`, `comparison`, `accident`, `layer`, `timeline`
+- `title`: 図タイトル
+- `nodes`: 図の要素。文字列または `{ "text": "...", "tone": "..." }`
+- `tone`: `normal`, `muted`, `blue`, `green`, `orange`, `danger`, `purple`
+- `reviewChapter`: Re:VIEW連携時の出力先章ID。未指定時はファイル名接頭辞から推定
+
+日本語フォントはDocker内に入っている `IPAGothic` を明示して出力します。
+
+Re:VIEW向けには `--review` を指定します。`.drawio` と `.drawio.png` を `ReVIEW/drawio_build/` に生成し、同じ図を `ReVIEW/images/<章ID>/` へJPGとして出力します。
+
+```bash
+npm run drawio -- --input /workspace/ReVIEW/drawio --review
+```
+
+Docker内だけで実行する例:
+
+```bash
+docker build -t slideforge-local .
+docker run --rm -v "$PWD/../..:/workspace" slideforge-local \
+  npm run drawio -- --input /workspace/ReVIEW/drawio --review
+```
+
+主なオプション:
+
+- `--input`: `.drawio.json` ファイルまたはディレクトリ
+- `--output`: `.drawio` と `.drawio.png` の出力先ディレクトリ
+- `--review`: Re:VIEW用JPGも生成する
+- `--review-images-dir`: Re:VIEW用JPGの出力先。省略時は `/workspace/ReVIEW/images`
+- `--scale`: draw.io出力倍率。デフォルトは `2`
+- `--border`: 図の外側余白。デフォルトは `20`
+
 ### X / Twitter のスクリーンショット
 
 X / Twitter は未ログインの自動ブラウザだと、プロフィールページがロゴ画面やログイン誘導で止まることがあります。基本方針として、プロフィールやタイムラインを直接撮るのではなく、単体ポストを `publish.twitter.com` の埋め込みに変換して撮影します。

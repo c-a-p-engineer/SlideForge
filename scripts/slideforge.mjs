@@ -10,6 +10,7 @@ function printUsage() {
   console.log(`Usage:
   slideforge render --input <file|dir> --format <png|pdf> [options]
   slideforge capture --url <url> [options]
+  slideforge drawio --input <file|dir> [--review] [options]
   slideforge render-all
   slideforge generate-samples`);
 }
@@ -20,6 +21,8 @@ function resolveScript(command) {
       return path.join(__dirname, "render.mjs");
     case "capture":
       return path.join(__dirname, "capture.mjs");
+    case "drawio":
+      return path.join(__dirname, "drawio.mjs");
     case "render-all":
       return path.join(__dirname, "render-all.mjs");
     case "generate-samples":
