@@ -146,6 +146,33 @@ function labelStyle(color = COLORS.muted, size = 15) {
   });
 }
 
+function textBlockStyle(color = COLORS.text, size = 15, extra = {}) {
+  return style({
+    text: 1,
+    html: 1,
+    strokeColor: "none",
+    fillColor: "none",
+    fontColor: color,
+    fontFamily: DEFAULT_FONT_FAMILY,
+    fontSize: size,
+    align: "left",
+    verticalAlign: "top",
+    whiteSpace: "wrap",
+    rounded: 0,
+    shadow: 0,
+    spacing: 0,
+    ...extra
+  });
+}
+
+function htmlLines(lines) {
+  return lines.filter(Boolean).join("<br>");
+}
+
+function bulletList(items) {
+  return (items ?? []).map((item) => `・${item}`).join("<br>");
+}
+
 function edgeStyle(toneName = "normal") {
   const tone = TONES[toneName] ?? TONES.normal;
 
@@ -447,6 +474,201 @@ function buildComparison(spec) {
   return graph;
 }
 
+function buildConcept(spec) {
+  const nodes = normalizeNodes(spec.nodes, 3);
+  const graph = new GraphBuilder();
+  addTitle(graph, spec.title);
+
+  const center = spec.center ?? "判断軸";
+  graph.vertex({
+    value: center,
+    x: 380,
+    y: 118,
+    width: 440,
+    height: 86,
+    style: boxStyle(spec.centerTone ?? "purple", {
+      fontSize: 21,
+      fontStyle: 1
+    })
+  });
+
+  const positions = [
+    { x: 240, y: 280 },
+    { x: 620, y: 280 },
+    { x: 240, y: 420 },
+    { x: 620, y: 420 }
+  ];
+  const boxWidth = 340;
+  const boxHeight = 92;
+
+  nodes.slice(0, 4).forEach((node, index) => {
+    const position = positions[index];
+    graph.vertex({
+      value: node.text,
+      x: position.x,
+      y: position.y,
+      width: boxWidth,
+      height: boxHeight,
+      style: boxStyle(toneOf(node))
+    });
+  });
+
+  return graph;
+}
+
+function buildBoundaryRules(spec) {
+  const sections = Array.isArray(spec.sections) ? spec.sections.slice(0, 4) : [];
+  if (sections.length < 4) {
+    throw new Error("boundary requires at least four sections.");
+  }
+
+  const graph = new GraphBuilder(1280, 820);
+
+  graph.vertex({
+    value: spec.title ?? "AIへ渡す前に責任境界を決める",
+    x: 80,
+    y: 0,
+    width: 1120,
+    height: 48,
+    style: titleStyle()
+  });
+
+  if (spec.subtitle) {
+    graph.vertex({
+      value: spec.subtitle,
+      x: 120,
+      y: 52,
+      width: 1040,
+      height: 28,
+      style: labelStyle(COLORS.muted, 15)
+    });
+  }
+
+  const hero = spec.hero ?? {};
+  graph.vertex({
+    value: htmlLines([
+      `<b>${hero.title ?? "守る対象を先に固定"}</b>`,
+      hero.body
+    ]),
+    x: 80,
+    y: 94,
+    width: 1120,
+    height: 76,
+    style: boxStyle(hero.tone ?? "purple", {
+      align: "left",
+      verticalAlign: "top",
+      fontSize: 16,
+      spacingTop: 10,
+      spacingLeft: 22,
+      spacingRight: 22,
+      spacingBottom: 10
+    })
+  });
+
+  const cardWidth = 260;
+  const cardGap = 27;
+  const positions = [
+    { x: 80, y: 200 },
+    { x: 80 + cardWidth + cardGap, y: 200 },
+    { x: 80 + (cardWidth + cardGap) * 2, y: 200 },
+    { x: 80 + (cardWidth + cardGap) * 3, y: 200 }
+  ];
+
+  sections.forEach((section, index) => {
+    const position = positions[index];
+    const toneName = toneOf(section, "normal");
+    const tone = TONES[toneName] ?? TONES.normal;
+    const items = Array.isArray(section.items) ? section.items.slice(0, 2) : [];
+
+    graph.vertex({
+      value: "",
+      x: position.x,
+      y: position.y,
+      width: cardWidth,
+      height: 190,
+      style: boxStyle(toneName, {
+        fillColor: "#FFFFFF",
+        spacing: 0
+      })
+    });
+
+    graph.vertex({
+      value: section.title,
+      x: position.x + 20,
+      y: position.y + 12,
+      width: cardWidth - 40,
+      height: 34,
+      style: textBlockStyle(tone.stroke, 22, {
+        fontStyle: 1,
+        verticalAlign: "middle"
+      })
+    });
+
+    graph.vertex({
+      value: section.description ?? "",
+      x: position.x + 20,
+      y: position.y + 50,
+      width: cardWidth - 40,
+      height: 44,
+      style: textBlockStyle(COLORS.text, 13, {
+        verticalAlign: "middle"
+      })
+    });
+
+    graph.vertex({
+      value: bulletList(items),
+      x: position.x + 20,
+      y: position.y + 100,
+      width: cardWidth - 40,
+      height: 50,
+      style: textBlockStyle(COLORS.text, 13, {
+        strokeColor: tone.stroke,
+        dashed: 1,
+        fillColor: tone.fill,
+        spacingTop: 6,
+        spacingLeft: 10,
+        spacingRight: 10,
+        spacingBottom: 6
+      })
+    });
+
+    if (section.note) {
+      graph.vertex({
+        value: section.note,
+        x: position.x + 20,
+        y: position.y + 158,
+        width: cardWidth - 40,
+        height: 24,
+        style: textBlockStyle(COLORS.text, 12, {
+          fillColor: tone.fill,
+          verticalAlign: "middle",
+          spacingLeft: 8,
+          spacingRight: 8
+        })
+      });
+    }
+  });
+
+  graph.vertex({
+    value: `<b>運用ルール</b>: ${(spec.rules ?? []).join(" / ")}`,
+    x: 80,
+    y: 420,
+    width: 1120,
+    height: 42,
+    style: boxStyle("muted", {
+      align: "left",
+      verticalAlign: "middle",
+      fontSize: 13,
+      spacingTop: 6,
+      spacingLeft: 22,
+      spacingRight: 22,
+      spacingBottom: 6
+    })
+  });
+
+  return graph;
+}
+
 function buildAccident(spec) {
   const nodes = normalizeNodes(spec.nodes, 2);
   const graph = new GraphBuilder();
@@ -503,6 +725,10 @@ function buildGraph(spec) {
       return buildLayer(spec);
     case "comparison":
       return buildComparison(spec);
+    case "concept":
+      return buildConcept(spec);
+    case "boundary":
+      return buildBoundaryRules(spec);
     case "accident":
       return buildAccident(spec);
     default:

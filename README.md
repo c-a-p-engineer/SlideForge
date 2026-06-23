@@ -12,6 +12,7 @@ HTML スライドを `PDF` / `PNG` に変換するためのリポジトリです
   - 複数ページ PDF: `dist/decks/`
 
 詳細な設計メモは [docs/notes.md](./docs/notes.md) に分けています。
+図種別の選び方は [docs/diagram-selection-guide.md](./docs/diagram-selection-guide.md) を参照してください。
 スライドの使い分けは [docs/slide-selection-guide.md](./docs/slide-selection-guide.md) を参照してください。
 スライド全体のデザイン判断は [docs/slide-design-guide.md](./docs/slide-design-guide.md)、テーマ一覧は [docs/theme-catalog.md](./docs/theme-catalog.md) にまとめています。
 
@@ -270,7 +271,7 @@ npm run drawio -- --input examples/drawio --output dist/drawio
 
 主な項目:
 
-- `type`: `flow`, `comparison`, `accident`, `layer`, `timeline`
+- `type`: `flow`, `concept`, `boundary`, `comparison`, `accident`, `layer`, `timeline`
 - `title`: 図タイトル
 - `nodes`: 図の要素。文字列または `{ "text": "...", "tone": "..." }`
 - `tone`: `normal`, `muted`, `blue`, `green`, `orange`, `danger`, `purple`
