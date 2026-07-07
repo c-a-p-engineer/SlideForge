@@ -1,0 +1,26 @@
+:root {
+  --bg: #f4f7fb;
+  --surface: #ffffff;
+  --text: #111827;
+  --muted: #526071;
+  --border: #d8e0ec;
+  --accent: #2458e6;
+  --accent-2: #07142f;
+  --accent-kpi: #2458e6;
+  --accent-flow: #2f7cff;
+  --soft: #edf4ff;
+  --surface-soft: rgba(255,255,255,.92);
+  --grid-line: color-mix(in srgb, #2458e6 16%, transparent);
+  --accent-glow: color-mix(in srgb, #2458e6 24%, transparent);
+  --danger-soft: color-mix(in srgb, #df2f3a 14%, transparent);
+  --flow-soft: color-mix(in srgb, #2f7cff 14%, transparent);
+  --watermark: color-mix(in srgb, #2458e6 10%, transparent);
+  --chart-a: #2458e6;
+  --chart-b: #2fa66a;
+  --chart-c: #f18a28;
+  --chart-d: #df2f3a;
+  --code-bg: #101827;
+  --code-text: #dbeafe;
+}
+.slide { background: var(--bg); }
+.slide::before { background: radial-gradient(circle at 90% 8%, rgba(36,88,230,.16), transparent 30%), linear-gradient(135deg, rgba(255,255,255,.9), transparent 46%); }

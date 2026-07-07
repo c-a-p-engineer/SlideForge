@@ -13,7 +13,7 @@
     "drawio": "node scripts/drawio.mjs",
     "render:deck": "node scripts/render-deck.mjs",
     "render:all": "node scripts/render-all.mjs",
-    "generate:samples": "bash scripts/generate-samples.sh"
+    "generate:samples": "node scripts/build-samples.mjs"
   },
   "engines": {
     "node": ">=22.0.0"

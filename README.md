@@ -14,46 +14,22 @@ HTML スライドを `PDF` / `PNG` に変換するためのリポジトリです
 詳細な設計メモは [docs/notes.md](./docs/notes.md) に分けています。
 図種別の選び方は [docs/diagram-selection-guide.md](./docs/diagram-selection-guide.md) を参照してください。
 スライドの使い分けは [docs/slide-selection-guide.md](./docs/slide-selection-guide.md) を参照してください。
+サンプル28枚のページ別説明とプレビューは [docs/sample-slide-catalog.md](./docs/sample-slide-catalog.md) を参照してください。
 スライド全体のデザイン判断は [docs/slide-design-guide.md](./docs/slide-design-guide.md)、テーマ一覧は [docs/theme-catalog.md](./docs/theme-catalog.md) にまとめています。
 
-現在のサンプルテーマは `light` と `dark` の 2 種類です。各テーマに 27 枚の横型テンプレートを用意しています。
+現在のサンプルテーマは `book`、`dark`、`light`、`tech_news_catalog` です。
+各テーマに、IT解説・ニュース解説向けの合計 28 枚の横型 16:9 テンプレートを用意しています。
+スライド構造は4テーマで共通で、色合いは各 `slides/<theme>/theme.css` のテーマ変数に従います。
 
-- コア: `cover`, `section`, `single`, `two_column`, `list`, `highlight`
-- 実用: `comparison`, `cards`, `chart`, `flow`, `timeline`, `gantt`
-- 拡張: `diagram`, `system`, `code`, `before_after`, `faq`, `contact`
-- グラフ: `bar`, `line`, `pie`, `stacked`, `area`, `scatter`, `radar`, `histogram`, `waterfall`
+- 基本: `title`, `agenda`, `section_divider`, `key_message`, `three_cards`, `comparison_table`, `timeline_horizontal`, `timeline_vertical`, `flowchart`, `architecture`, `code`, `summary`
+- IT・技術向け: `terminal_log`, `api_request_response`, `database_table`, `browser_mock`, `file_tree`, `security_attack_flow`, `incident_report`, `risk_matrix`
+- ニュース・解説向け: `news_headline`, `issue_summary`, `cause_effect_solution`, `number_highlight`, `quote`, `sns_reaction_summary`, `what_happened_timeline`, `final_opinion`
+
+各ページの役割、使いどころ、HTML/PNG/PDFプレビューへのリンクは [Sample Slide Catalog](./docs/sample-slide-catalog.md) にまとめています。
 
 テンプレートはスマホ閲覧でも読みやすい大きめの文字サイズを基準にしています。実資料では、長文を入れるよりも本文を削り、必要な説明を発話や補足資料で補う運用を想定しています。
 
-サンプルのページ順:
-
-1. `cover`
-2. `section`
-3. `single`
-4. `two_column`
-5. `list`
-6. `highlight`
-7. `comparison`
-8. `cards`
-9. `chart`
-10. `flow`
-11. `timeline`
-12. `gantt`
-13. `diagram`
-14. `system`
-15. `code`
-16. `before_after`
-17. `faq`
-18. `contact`
-19. `chart-bar`
-20. `chart-line`
-21. `chart-pie`
-22. `chart-stacked`
-23. `chart-area`
-24. `chart-scatter`
-25. `chart-radar`
-26. `chart-histogram`
-27. `chart-waterfall`
+サンプルのHTMLは `npm run generate:samples` で再生成できます。
 
 ## AI でスライドを作る手順
 
@@ -68,7 +44,7 @@ AI に依頼するときは、まず次の 4 点を渡すと作業が安定し�
 
 ```text
 SlideForge のテンプレートを使ってスライドを作成してください。
-テーマは light / dark のどちらかを使ってください。
+テーマは book / dark / light / tech_news_catalog のいずれかを使ってください。
 出力先は slides/<style>/ 配下です。
 各ページは 01-cover.html, 02-section.html のような連番ファイルで作成してください。
 必要なら既存サンプルの role を流用し、最後に render コマンドも実行してください。
@@ -78,7 +54,7 @@ AI に伝えるとよい追加条件:
 
 - 表紙に入れるタイトル、作者、日付、所属
 - 必要な role
-  例: `cover`, `section`, `single`, `two_column`, `comparison`, `chart`, `timeline`, `gantt`, `system`, `contact`
+  例: `title`, `agenda`, `comparison_table`, `timeline_horizontal`, `architecture`, `code`, `incident_report`, `news_headline`
 - 必要な図
   例: `flow`, `timeline`, `gantt`, `system`, `bar`, `line`, `waterfall`
 - 出力形式
@@ -100,17 +76,17 @@ SlideForge を使って 8 ページの提案資料を作成してください。
 
 ```text
 SlideForge を使って dark テーマで技術説明資料を作成してください。
-構成は cover, section, flow, system, code, line-chart, faq, contact にしてください。
+構成は title, agenda, architecture, code, incident_report, risk_matrix, summary にしてください。
 システム構成図とフロー図を含めてください。
 最後に PNG を一括出力してください。
 ```
 
 AI が編集する場所の基本ルール:
 
-- 横型資料は `slides/light/` または `slides/dark/`
-- 共通スタイルは `slides/base.css`
+- 横型資料は `slides/book/`、`slides/dark/`、`slides/light/`、`slides/tech_news_catalog/`
+- 共通スタイルは `slides/base.css` と `slides/sample-catalog.css`
 - テーマ差分は `slides/<style>/theme.css`
-- サンプル一括再生成は `scripts/build-requested-slides.mjs`
+- サンプル一括再生成は `npm run generate:samples`
 
 AI が最後に実行すべきコマンドの例:
 
@@ -120,6 +96,38 @@ npm run render -- --input slides/dark --format png
 npm run render:all
 ```
 
+## IT解説・ニュース解説向けサンプル
+
+`book`、`dark`、`light`、`tech_news_catalog` の4テーマで同じ28種類のサンプルを生成します。
+日本語の可読性、コード・表・タイムライン・フロー・アーキテクチャ図の見やすさ、動画字幕用の下部余白を優先しています。
+
+サンプル生成:
+
+```bash
+npm run generate:samples
+```
+
+PNG / PDF 出力:
+
+```bash
+npm run render -- --input slides/book --format png --preset widescreen
+npm run render -- --input slides/dark --format png --preset widescreen
+npm run render -- --input slides/light --format png --preset widescreen
+npm run render -- --input slides/tech_news_catalog --format png --preset widescreen
+```
+
+出力先:
+
+- PNG: `dist/slides/<theme>/`
+- PDF: `dist/decks/<theme>.pdf`
+- 確認用JPG: `dist/catalog/<theme>-contact-sheet.jpg`
+
+CLI から直接生成する場合:
+
+```bash
+node scripts/slideforge.mjs generate-samples
+```
+
 ## 変換コマンド
 
 セットアップ:
@@ -127,6 +135,7 @@ npm run render:all
 ```bash
 npm install
 node scripts/build-requested-slides.mjs
+npm run generate:samples
 ```
 
 ディレクトリ内の全 HTML を個別 PNG に変換:

@@ -1,5 +1,7 @@
 # Slide Selection Guide
 
+現在のIT解説・ニュース解説向けサンプル 28 枚の詳細な役割、HTML、PNGプレビューは [sample-slide-catalog.md](./sample-slide-catalog.md) を参照してください。
+
 ## 使い分け
 
 - `cover`

@@ -33,6 +33,7 @@ async function runNode(args) {
 }
 
 async function main() {
+  await fs.rm(path.resolve(process.cwd(), "dist"), { recursive: true, force: true });
   const styles = await listStyles();
 
   for (const style of styles) {

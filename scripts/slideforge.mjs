@@ -26,7 +26,7 @@ function resolveScript(command) {
     case "render-all":
       return path.join(__dirname, "render-all.mjs");
     case "generate-samples":
-      return path.join(__dirname, "generate-samples.sh");
+      return path.join(__dirname, "build-samples.mjs");
     default:
       return null;
   }
@@ -41,10 +41,10 @@ function runCommand(command, args) {
     return;
   }
 
-  const child =
-    command === "generate-samples"
-      ? spawn("bash", [scriptPath, ...args], { stdio: "inherit", cwd: process.cwd() })
-      : spawn(process.execPath, [scriptPath, ...args], { stdio: "inherit", cwd: process.cwd() });
+  const child = spawn(process.execPath, [scriptPath, ...args], {
+    stdio: "inherit",
+    cwd: process.cwd()
+  });
 
   child.on("exit", (code) => {
     process.exitCode = code ?? 1;
