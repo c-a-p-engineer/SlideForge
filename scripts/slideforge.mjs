@@ -8,7 +8,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 function printUsage() {
   console.log(`Usage:
-  slideforge render --input <file|dir> --format <png|pdf> [options]
+  slideforge render --input <file|dir> --format <png|pdf|pptx> [options]
   slideforge capture --url <url> [options]
   slideforge drawio --input <file|dir> [--review] [options]
   slideforge render-all

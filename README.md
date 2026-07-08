@@ -1,6 +1,6 @@
 # SlideForge
 
-HTML スライドを `PDF` / `PNG` に変換するためのリポジトリです。
+HTML スライドを `PDF` / `PNG` / `PPTX` に変換するためのリポジトリです。
 
 ## 前提
 
@@ -9,7 +9,7 @@ HTML スライドを `PDF` / `PNG` に変換するためのリポジトリです
 - 入力: `slides/<style>/` または単体 `html`
 - 出力:
   - 個別 PNG: `dist/slides/<style>/`
-  - 複数ページ PDF: `dist/decks/`
+  - 複数ページ PDF / PPTX: `dist/decks/`
 
 詳細な設計メモは [docs/notes.md](./docs/notes.md) に分けています。
 図種別の選び方は [docs/diagram-selection-guide.md](./docs/diagram-selection-guide.md) を参照してください。
@@ -58,7 +58,7 @@ AI に伝えるとよい追加条件:
 - 必要な図
   例: `flow`, `timeline`, `gantt`, `system`, `bar`, `line`, `waterfall`
 - 出力形式
-  例: `png`, `pdf`
+  例: `png`, `pdf`, `pptx`
 - 画面サイズ
   例: `widescreen`
 
@@ -93,6 +93,7 @@ AI が最後に実行すべきコマンドの例:
 ```bash
 npm run render -- --input slides/light --format pdf
 npm run render -- --input slides/dark --format png
+npm run render -- --input slides/light --format pptx
 npm run render:all
 ```
 
@@ -107,19 +108,21 @@ npm run render:all
 npm run generate:samples
 ```
 
-PNG / PDF 出力:
+PNG / PDF / PPTX 出力:
 
 ```bash
 npm run render -- --input slides/book --format png --preset widescreen
 npm run render -- --input slides/dark --format png --preset widescreen
 npm run render -- --input slides/light --format png --preset widescreen
 npm run render -- --input slides/tech_news_catalog --format png --preset widescreen
+npm run render -- --input slides/light --format pptx --preset widescreen
 ```
 
 出力先:
 
 - PNG: `dist/slides/<theme>/`
 - PDF: `dist/decks/<theme>.pdf`
+- PPTX: `dist/decks/<theme>.pptx`
 - 確認用JPG: `dist/catalog/<theme>-contact-sheet.jpg`
 
 CLI から直接生成する場合:
@@ -150,11 +153,26 @@ npm run render -- --input slides/light --format png
 npm run render -- --input slides/light --format pdf
 ```
 
+ディレクトリ内の全 HTML を複数ページ PPTX に変換:
+
+```bash
+npm run render -- --input slides/light --format pptx
+```
+
 単体 HTML を PNG に変換:
 
 ```bash
 npm run render -- --input slides/dark/15-code.html --format png
 ```
+
+単体 HTML を 1 枚だけの PPTX に変換:
+
+```bash
+npm run render -- --input slides/dark/15-code.html --format pptx
+```
+
+PPTX出力はP0実装です。
+生成済みスライド画像を1枚ずつPowerPointに貼り付ける方式のため、PowerPoint上で文字や図形を個別編集することはできません。
 
 全サンプル出力:
 
@@ -165,8 +183,8 @@ npm run render:all
 主なオプション:
 
 - `--input`: 入力 HTML またはディレクトリ
-- `--output`: 出力先。省略時は HTML なら `dist/<input-path>.拡張子`、ディレクトリ + PNG なら `dist/<input-dir>/`、ディレクトリ + PDF なら `dist/decks/<style>.pdf`
-- `--format`: `png` または `pdf`
+- `--output`: 出力先。省略時は HTML なら `dist/<input-path>.拡張子`、ディレクトリ + PNG なら `dist/<input-dir>/`、ディレクトリ + PDF/PPTX なら `dist/decks/<style>.pdf|pptx`
+- `--format`: `png`、`pdf`、`pptx`
 - `--preset`: `widescreen` または `mobile`。現在の同梱サンプルは `widescreen` 前提
 - `--width`, `--height`: プリセットを上書き
 - `--scale`: PNG 出力の解像度倍率
@@ -190,8 +208,10 @@ PNG 出力では、切り出し対象要素に設定された `--slideforge-auto
 ```bash
 npm run render -- --input slides/light --format png
 npm run render -- --input slides/light --format pdf
+npm run render -- --input slides/light --format pptx
 npm run render -- --input slides/dark --format png
 npm run render -- --input slides/dark --format pdf
+npm run render -- --input slides/dark/15-code.html --format pptx
 npm run render -- --input slides/light --format png --output dist/custom/light
 npm run render -- --input slides/dark/15-code.html --format png --scale 2
 ```

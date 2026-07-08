@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 import os from "node:os";
 import path from "node:path";
 import { pathToFileURL } from "node:url";
+import PptxGenJS from "pptxgenjs";
 import { chromium } from "playwright";
 
 const PRESETS = {
@@ -9,6 +10,7 @@ const PRESETS = {
   mobile: { width: 1080, height: 1920 }
 };
 const PNG_CAPTURE_GUTTER = 64;
+const PX_PER_INCH = 144;
 const AUTO_TRIM_MODES = new Set([
   "none",
   "block-end",
@@ -17,6 +19,10 @@ const AUTO_TRIM_MODES = new Set([
   "inline",
   "box"
 ]);
+
+function pxToInch(px) {
+  return px / PX_PER_INCH;
+}
 
 function parseArgs(argv) {
   const options = {};
@@ -84,6 +90,21 @@ async function listHtmlFiles(dirPath) {
     .filter((entry) => entry.isFile() && entry.name.toLowerCase().endsWith(".html"))
     .map((entry) => path.join(dirPath, entry.name))
     .sort((a, b) => a.localeCompare(b));
+}
+
+async function resolveHtmlInputs(inputPath, inputLabel, inputStat) {
+  if (!inputStat.isDirectory()) {
+    await ensureFileExists(inputPath);
+    return [inputPath];
+  }
+
+  const files = await listHtmlFiles(inputPath);
+
+  if (files.length === 0) {
+    throw new Error(`No slide pages found in ${inputLabel}`);
+  }
+
+  return files;
 }
 
 function styleNameFromDir(dirPath) {
@@ -379,7 +400,8 @@ async function renderSingleFile({
   selector,
   width,
   height,
-  scale
+  scale,
+  crop = true
 }) {
   const page = await openPage(browser, inputPath, width, height, scale);
   const tempOutputPath = buildTempOutputPath(outputPath);
@@ -390,9 +412,9 @@ async function renderSingleFile({
 
     if (format === "png") {
       await page.emulateMedia({ media: "screen" });
-      const clip = await resolveClipRegion(slide);
+      const clip = crop ? await resolveClipRegion(slide) : null;
 
-      if (clip.hasCrop) {
+      if (clip?.hasCrop) {
         await page.screenshot({
           path: tempOutputPath,
           type: "png",
@@ -423,15 +445,87 @@ async function renderSingleFile({
   }
 }
 
+async function renderPptxFromHtmlFiles({
+  browser,
+  htmlFiles,
+  outputPath,
+  selector,
+  width,
+  height,
+  scale
+}) {
+  const tempDir = await fs.mkdtemp(path.join(os.tmpdir(), "slideforge-pptx-"));
+  const tempOutputPath = buildTempOutputPath(outputPath);
+  const slideWidthInch = pxToInch(width);
+  const slideHeightInch = pxToInch(height);
+
+  try {
+    const imagePaths = [];
+
+    for (let index = 0; index < htmlFiles.length; index += 1) {
+      const filePath = htmlFiles[index];
+      const imagePath = path.join(
+        tempDir,
+        `${String(index + 1).padStart(4, "0")}-${path.parse(filePath).name}.png`
+      );
+
+      await renderSingleFile({
+        browser,
+        inputPath: filePath,
+        outputPath: imagePath,
+        format: "png",
+        selector,
+        width,
+        height,
+        scale,
+        crop: false
+      });
+
+      imagePaths.push(imagePath);
+    }
+
+    const pptx = new PptxGenJS();
+    pptx.author = "SlideForge";
+    pptx.subject = "SlideForge image-based deck";
+    pptx.title = path.parse(outputPath).name;
+    pptx.defineLayout({
+      name: "SLIDEFORGE_CUSTOM",
+      width: slideWidthInch,
+      height: slideHeightInch
+    });
+    pptx.layout = "SLIDEFORGE_CUSTOM";
+
+    for (const imagePath of imagePaths) {
+      const slide = pptx.addSlide();
+      slide.background = { color: "FFFFFF" };
+      slide.addImage({
+        path: imagePath,
+        x: 0,
+        y: 0,
+        w: slideWidthInch,
+        h: slideHeightInch
+      });
+    }
+
+    await fs.mkdir(path.dirname(outputPath), { recursive: true });
+    await pptx.writeFile({ fileName: tempOutputPath });
+    await fs.copyFile(tempOutputPath, outputPath);
+  } finally {
+    await fs.rm(tempOutputPath, { force: true }).catch(() => {});
+    await fs.rm(tempDir, { recursive: true, force: true }).catch(() => {});
+  }
+}
+
+function resolveFormat(args) {
+  const outputExt = path.extname(args.output ?? "").slice(1);
+  return (args.format || outputExt || "png").toLowerCase();
+}
+
 async function main() {
   const args = parseArgs(process.argv.slice(2));
   const cwd = process.cwd();
   const input = args.input;
-  const format = (
-    args.format ??
-    path.extname(args.output ?? "").slice(1) ??
-    "png"
-  ).toLowerCase();
+  const format = resolveFormat(args);
   const selector = args.selector ?? ".slide";
   const scale = Number(args.scale ?? 1);
 
@@ -439,7 +533,7 @@ async function main() {
     throw new Error("Missing required option: --input <path>");
   }
 
-  if (!["png", "pdf"].includes(format)) {
+  if (!["png", "pdf", "pptx"].includes(format)) {
     throw new Error(`Unsupported format: ${format}`);
   }
 
@@ -459,12 +553,8 @@ async function main() {
   try {
     if (inputStat.isDirectory()) {
       if (format === "png") {
-        const files = await listHtmlFiles(inputPath);
+        const files = await resolveHtmlInputs(inputPath, input, inputStat);
         const outputDir = path.resolve(cwd, args.output ?? path.join("dist", input));
-
-        if (files.length === 0) {
-          throw new Error(`No slide pages found in ${input}`);
-        }
 
         await fs.mkdir(outputDir, { recursive: true });
 
@@ -502,7 +592,7 @@ async function main() {
             )
           );
         }
-      } else {
+      } else if (format === "pdf") {
         const { tempPath, pageCount } = await createDeckSource(inputPath, width, height);
         const outputPath = path.resolve(
           cwd,
@@ -541,22 +631,67 @@ async function main() {
         } finally {
           await fs.rm(tempPath, { force: true });
         }
+      } else {
+        const files = await resolveHtmlInputs(inputPath, input, inputStat);
+        const outputPath = path.resolve(
+          cwd,
+          args.output ?? path.join("dist", "decks", `${styleNameFromDir(inputPath)}.pptx`)
+        );
+
+        await renderPptxFromHtmlFiles({
+          browser,
+          htmlFiles: files,
+          outputPath,
+          selector,
+          width,
+          height,
+          scale
+        });
+
+        console.log(
+          JSON.stringify(
+            {
+              input,
+              output: path.relative(cwd, outputPath),
+              format,
+              preset: presetName,
+              width,
+              height,
+              scale,
+              pages: files.length
+            },
+            null,
+            2
+          )
+        );
       }
     } else {
       await ensureFileExists(inputPath);
       const outputPath = path.resolve(cwd, args.output ?? inferOutputPath(input, format));
       await fs.mkdir(path.dirname(outputPath), { recursive: true });
 
-      await renderSingleFile({
-        browser,
-        inputPath,
-        outputPath,
-        format,
-        selector,
-        width,
-        height,
-        scale
-      });
+      if (format === "pptx") {
+        await renderPptxFromHtmlFiles({
+          browser,
+          htmlFiles: [inputPath],
+          outputPath,
+          selector,
+          width,
+          height,
+          scale
+        });
+      } else {
+        await renderSingleFile({
+          browser,
+          inputPath,
+          outputPath,
+          format,
+          selector,
+          width,
+          height,
+          scale
+        });
+      }
 
       console.log(
         JSON.stringify(
